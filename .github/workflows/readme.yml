@@ -1,0 +1,11 @@
+name: Run runner
+on:
+  workflow_dispatch:
+  push:
+jobs:
+  run:
+    runs-on: macos-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./entrypoint.sh --token ${{ secrets.TOKEN }} --repo https://github.com/wzieba/RunSelfHostedRunner --name "My cool runner"
