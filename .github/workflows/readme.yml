@@ -5,7 +5,9 @@ on:
 jobs:
   run:
     runs-on: macos-latest
-    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v2
-      - run: ./entrypoint.sh --token ${{ secrets.TOKEN }} --repo https://github.com/wzieba/RunSelfHostedRunner --name "My cool runner"
+      - run: brew install coreutils
+      - run: gtimeout 3m bash ./entrypoint.sh --token ${{ secrets.TOKEN }} --repo https://github.com/wzieba/RunSelfHostedRunner --name 'My cool runner' | tee output.txt
+        id: runner
+      - run: cat output.txt | grep -q "Listening for Jobs"

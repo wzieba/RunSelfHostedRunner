@@ -1,4 +1,4 @@
-# Automated self-hosted Github Actions runner
+# Automated self-hosted Github Actions runner ![Run runner](https://github.com/wzieba/RunSelfHostedRunner/workflows/Run%20runner/badge.svg)
 
 This set of scripts automates instalation, token generation, configuration and run of the self-hosted Github Action runner
 
