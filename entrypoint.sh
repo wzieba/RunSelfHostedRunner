@@ -14,6 +14,18 @@ export ACCESS_TOKEN=${token}
 export REPO_URL=${repo}
 export RUNNER_NAME=${name}
 
+cleanup() {
+    printf "\nRemoving runner"
+
+    echo "Generating deletion token"
+    _TOKEN=$(bash ./token.sh)
+    DELETION_TOKEN=$(echo "${_TOKEN}" | jq -r .token)
+    ./config.sh remove --token "${DELETION_TOKEN}"
+    exit
+}
+
+trap cleanup EXIT
+
 echo "Install actions"
 bash ./install_actions.sh
 

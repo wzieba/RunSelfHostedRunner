@@ -10,4 +10,9 @@ jobs:
       - run: brew install coreutils
       - run: gtimeout 3m bash ./entrypoint.sh --token ${{ secrets.TOKEN }} --repo https://github.com/wzieba/RunSelfHostedRunner --name 'My cool runner' | tee output.txt
         id: runner
-      - run: cat output.txt | grep -q "Listening for Jobs"
+      - name: "Assert runner has started successfully"
+        run: cat output.txt | grep -q "Listening for Jobs"
+      - name: "Assert runner has been removed on finish"
+        run: cat output.txt | grep -q "Runner removed successfully"
+
+
